@@ -7,7 +7,7 @@ int main()
 	const Color BGCOLOR = {70, 119, 202, 255};
 	const int TEXTSIZE = 20;
 	const int MESSAGE_SIZE = 11;
-	// C style string because this library was made by a MORON
+	// C style string because C is for Cancer
 	char message[MESSAGE_SIZE] = "I'm alive!";
 	
 	InitWindow(windowWidth, windowHeight, "Shapes GUI");
