@@ -1,4 +1,6 @@
 #include "raylib.h"
+#include "GWindow.h"
+#include "GLabel.h"
 
 int main()
 {
@@ -6,26 +8,29 @@ int main()
 	const int windowHeight = 600;
 	const Color BGCOLOR = {70, 119, 202, 255};
 	const int TEXTSIZE = 20;
-	const int MESSAGE_SIZE = 11;
-	// C style string because C is for Cancer
-	char message[MESSAGE_SIZE] = "I'm alive!";
+	const int MESSAGE_LENGTH = 11;
+	const int NUM_SIDES_LABEL_LENGTH = 37;
+	const char windowTitle[MESSAGE_LENGTH] = "Shapes GUI";
+	const char message[NUM_SIDES_LABEL_LENGTH] = "How many sides does your shape have?";
+
+	GWindow mainWindow(windowWidth, windowHeight, BGCOLOR, windowTitle);
+	GLabel numSidesLabel("numSidesLabel", 
+					   (windowWidth / 2) - (MeasureText(message, TEXTSIZE) / 2), 
+					   windowWidth / 4, 
+					   message, 
+					   NUM_SIDES_LABEL_LENGTH, 
+					   TEXTSIZE, 
+					   WHITE);
 	
-	InitWindow(windowWidth, windowHeight, "Shapes GUI");
+	mainWindow.addComponent(numSidesLabel);
+
 	SetTargetFPS(30);
 	
 	while(!WindowShouldClose())
 	{
 		// Draw
 		BeginDrawing();
-			// Fill background with color
-			ClearBackground(BGCOLOR);
-			
-			// Draw some text!
-			DrawText(message, 
-					(windowWidth / 2) - (MeasureText(message, TEXTSIZE) / 2), 
-					 windowHeight / 4, 
-					 TEXTSIZE, 
-					 WHITE);
+			mainWindow.draw();
 		EndDrawing();
 	}
 	
