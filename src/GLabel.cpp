@@ -1,11 +1,13 @@
 #include "GLabel.h"
 
-GLabel::GLabel(int initXCoord, 
+GLabel::GLabel(std::string newName, 
+               int initXCoord, 
                int initYCoord, 
                const char* initContent, 
                int initContentLength, 
                int initTextSize, 
                Color initColor) : 
+               GComponent(newName), 
                xCoord(initXCoord), 
                yCoord(initYCoord), 
                content(initContent), 
@@ -17,5 +19,5 @@ GLabel::GLabel(int initXCoord,
 
 void GLabel::draw()
 {
-    DrawText(content, 50, 50, 20, WHITE);
+    DrawText(content, xCoord, yCoord, textSize, WHITE);
 }

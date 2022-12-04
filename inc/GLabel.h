@@ -2,8 +2,10 @@
 #define G_LABEL_H
 
 #include "raylib.h"
+#include "GComponent.h"
+#include <string>
 
-class GLabel
+class GLabel : public GComponent
 {
     private:
     int xCoord;
@@ -14,7 +16,8 @@ class GLabel
     Color textColor;
 
     public:
-    GLabel(int initXCoord, 
+    GLabel(std::string newName, 
+           int initXCoord, 
            int initYCoord, 
            const char* initContent, 
            int initContentLength, 
