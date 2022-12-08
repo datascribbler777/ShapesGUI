@@ -21,7 +21,7 @@ class GWindow
     ~GWindow(){};
     void draw();
     void addComponent(GComponent& newComponent);
-    GComponent* getComponent(std::string componentName);
+    //GComponent* getComponent(std::string componentName);
 };
 
 #endif

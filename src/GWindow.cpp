@@ -13,6 +13,7 @@ void GWindow::draw()
     drawComponents();
 }
 
+/*
 GComponent* GWindow::getComponent(std::string componentName)
 {
     GComponent* output = nullptr;
@@ -25,6 +26,7 @@ GComponent* GWindow::getComponent(std::string componentName)
     }
     return output;
 }
+*/
 
 void GWindow::addComponent(GComponent& newComponent)
 {

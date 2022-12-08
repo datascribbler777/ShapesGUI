@@ -8,12 +8,12 @@
 class GLabel : public GComponent
 {
     private:
-    int xCoord;
-    int yCoord;
+    int xCoord = 0;
+    int yCoord = 0;
     const char* content;
-    int contentLength;
-    int textSize;
-    Color textColor;
+    int contentLength = 1;
+    int textSize = 10;
+    Color textColor = BLACK;
 
     public:
     GLabel(std::string newName, 
@@ -25,6 +25,7 @@ class GLabel : public GComponent
            Color initColor);
     ~GLabel(){};
     void draw();
+    int getYCoord(){return yCoord;};
 };
 
 #endif
