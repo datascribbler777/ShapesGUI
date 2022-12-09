@@ -8,11 +8,19 @@ class GComponent
 {
     private:
     std::string name;
+    bool focusable = false;
+    bool hasFocus = false;
 
     public:
-    GComponent(std::string newName) : name(newName){};
-    virtual void draw() = 0;
+    GComponent(std::string newName, bool focusableStatus, bool hasFocusStatus) : 
+        name(newName), focusable(focusableStatus), hasFocus(hasFocusStatus){};
+    virtual void draw(int& framesCounter) = 0;
     std::string getName(){ return name;};
+    void setFocusable(bool newStatus){focusable = newStatus;};
+    bool getFocusableStatus(){return focusable;};
+    void setFocus(bool newStatus){hasFocus = newStatus;};
+    bool getFocusStatus(){return hasFocus;};
+    virtual void update(int& framesCounter) = 0;
 };
 
 #endif

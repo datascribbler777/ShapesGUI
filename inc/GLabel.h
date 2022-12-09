@@ -22,10 +22,13 @@ class GLabel : public GComponent
            const char* initContent, 
            int initContentLength, 
            int initTextSize, 
-           Color initColor);
+           Color initColor, 
+           bool focusableStatus, 
+           bool hasFocusStatus);
     ~GLabel(){};
-    void draw();
+    void draw(int& framesCounter);
     int getYCoord(){return yCoord;};
+    void update(int& framesCounter);
 };
 
 #endif

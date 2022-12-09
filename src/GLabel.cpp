@@ -6,8 +6,10 @@ GLabel::GLabel(std::string newName,
                const char* initContent, 
                int initContentLength, 
                int initTextSize, 
-               Color initColor) : 
-               GComponent(newName), 
+               Color initColor, 
+               bool focusableStatus, 
+               bool hasFocusStatus) : 
+               GComponent(newName, focusableStatus, hasFocusStatus), 
                xCoord(initXCoord), 
                yCoord(initYCoord), 
                content(initContent), 
@@ -17,7 +19,12 @@ GLabel::GLabel(std::string newName,
 {
 }
 
-void GLabel::draw()
+void GLabel::draw(int& framesCounter)
 {
     DrawText(content, xCoord, yCoord, textSize, WHITE);
+}
+
+void GLabel::update(int& framesCounter)
+{
+    
 }
