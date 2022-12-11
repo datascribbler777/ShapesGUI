@@ -13,4 +13,4 @@ The batfile included may work for you.
 * Text Box
 
 ## Screenshot
-![Current GUI State](https://github.com/datascribbler777/ShapesGUI/blob/feature/GUI.png?raw=true)
+![Current GUI State](https://github.com/datascribbler777/ShapesGUI/blob/1dfaa3b34dcdcdb16301cc05d9f3c292a4899b72/images/GUI.PNG)
