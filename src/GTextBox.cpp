@@ -35,6 +35,35 @@ void GTextBox::draw(int& framesCounter)
 
 void GTextBox::update(int& framesCounter)
 {
+    // Handle typing in this text box
+    if(getFocusStatus())
+    {
+        int keyPressed = GetCharPressed();
+        while(keyPressed > 0)
+        {
+            // Only allow numeric input
+            if((keyPressed >= 48) && (keyPressed <= 57) && (contentCurrentSize < CONTENT_MAX_SIZE))
+            {
+                content[contentCurrentSize] = (char)keyPressed;
+                content[contentCurrentSize + 1] = '\0';
+                contentCurrentSize++;
+            }
+            keyPressed = GetCharPressed();
+        }
+    }
+
+    // Handle backspace to delete chars
+    if(IsKeyPressed(KEY_BACKSPACE))
+    {
+        contentCurrentSize--;
+        if(contentCurrentSize < 0)
+        {
+            contentCurrentSize = 0;
+        }
+        content[contentCurrentSize] = '\0';
+    }
+
+    // Tick counter to allow a blinking cursor
     if(getFocusStatus())
     {
         framesCounter++;
