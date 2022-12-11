@@ -1,18 +1,38 @@
 #include "GWindow.h"
 
+void GWindow::drawComponents(int& framesCounter)
+{
+    for(size_t i = 0; i < components.size(); i++)
+    {
+        components[i]->draw(framesCounter);
+    }
+}
+
 GWindow::GWindow(int initWidth, int initHeight, Color initBgcolor, const char* initTitle) :
     width(initWidth), height(initHeight), bgcolor(initBgcolor), title(initTitle)
 {
     InitWindow(width, height, title);
 }
 
-void GWindow::draw()
+void GWindow::draw(int framesCounter)
 {
     // Fill background with color
     ClearBackground(bgcolor);
-    drawComponents();
+    drawComponents(framesCounter);
 }
 
+void GWindow::addComponent(GComponent& newComponent)
+{
+    GComponent* temp = &newComponent;
+    components.push_back(temp);
+    if(components[components.size() - 1]->getFocusStatus())
+    {
+        setCurrentFocusIndex(components.size() - 1);
+    }
+
+}
+
+/*
 GComponent* GWindow::getComponent(std::string componentName)
 {
     GComponent* output = nullptr;
@@ -25,17 +45,17 @@ GComponent* GWindow::getComponent(std::string componentName)
     }
     return output;
 }
+*/
 
-void GWindow::addComponent(GComponent& newComponent)
+void GWindow::setCurrentFocusIndex(int newIndex)
 {
-    GComponent* temp = &newComponent;
-    components.push_back(temp);
+    currentFocusIndex = newIndex;
 }
 
-void GWindow::drawComponents()
+void GWindow::update(int& framesCounter)
 {
     for(size_t i = 0; i < components.size(); i++)
     {
-        components[i]->draw();
+        components[i]->update(framesCounter);
     }
 }

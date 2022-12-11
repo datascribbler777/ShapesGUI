@@ -8,12 +8,12 @@
 class GLabel : public GComponent
 {
     private:
-    int xCoord;
-    int yCoord;
+    int xCoord = 0;
+    int yCoord = 0;
     const char* content;
-    int contentLength;
-    int textSize;
-    Color textColor;
+    int contentLength = 1;
+    int textSize = 10;
+    Color textColor = BLACK;
 
     public:
     GLabel(std::string newName, 
@@ -22,9 +22,13 @@ class GLabel : public GComponent
            const char* initContent, 
            int initContentLength, 
            int initTextSize, 
-           Color initColor);
+           Color initColor, 
+           bool focusableStatus, 
+           bool hasFocusStatus);
     ~GLabel(){};
-    void draw();
+    void draw(int& framesCounter);
+    int getYCoord(){return yCoord;};
+    void update(int& framesCounter);
 };
 
 #endif
