@@ -28,7 +28,7 @@ class GLabel : public GComponent
     ~GLabel(){};
     void draw(int& framesCounter);
     int getYCoord(){return yCoord;};
-    void update(int& framesCounter);
+    void update(int& framesCounter, Vector2 mouseLocation);
 };
 
 #endif

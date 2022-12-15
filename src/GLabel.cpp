@@ -24,7 +24,7 @@ void GLabel::draw(int& framesCounter)
     DrawText(content, xCoord, yCoord, textSize, WHITE);
 }
 
-void GLabel::update(int& framesCounter)
+void GLabel::update(int& framesCounter, Vector2 mouseLocation)
 {
     
 }

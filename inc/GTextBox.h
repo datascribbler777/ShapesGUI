@@ -32,7 +32,9 @@ class GTextBox : public GComponent
              height(initHeight){};
     ~GTextBox(){};
     void draw(int& framesCounter);
-    void update(int& framesCounter);
+    void update(int& framesCounter, Vector2 mouseLocation);
+    int getXCoord(){ return xCoord; };
+    int getYCoord(){ return yCoord; };
 };
 
 #endif

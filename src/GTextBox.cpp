@@ -33,7 +33,7 @@ void GTextBox::draw(int& framesCounter)
     }
 }
 
-void GTextBox::update(int& framesCounter)
+void GTextBox::update(int& framesCounter, Vector2 mouseLocation)
 {
     // Handle typing in this text box
     if(getFocusStatus())

@@ -24,7 +24,7 @@ class GWindow
     void addComponent(GComponent& newComponent);
     //GComponent* getComponent(std::string componentName);
     void setCurrentFocusIndex(int newIndex);
-    void update(int& framesCounter);
+    void update(int& framesCounter, Vector2 mouseLocation);
 };
 
 #endif

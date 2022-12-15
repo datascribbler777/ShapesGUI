@@ -20,7 +20,8 @@ class GComponent
     bool getFocusableStatus(){return focusable;};
     void setFocus(bool newStatus){hasFocus = newStatus;};
     bool getFocusStatus(){return hasFocus;};
-    virtual void update(int& framesCounter) = 0;
+    //virtual void update(int& framesCounter) = 0;
+    virtual void update(int& framesCounter, Vector2 mouseLocation) = 0;
 };
 
 #endif

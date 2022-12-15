@@ -2,6 +2,9 @@
 #include "GWindow.h"
 #include "GLabel.h"
 #include "GTextBox.h"
+#include "GTexture.h"
+#include "GButton.h"
+#include <string>
 
 int main()
 {
@@ -38,13 +41,28 @@ int main()
 								 true};
 	mainWindow.addComponent(numSidesTextBox);
 
+	GTexture calculateButtonTexture = {"button.png"};
+	GButton calculateButton = {"calculateButton", 
+							   calculateButtonTexture, 
+							   0, 
+							   //numSidesTextBox.getXCoord() + NUMSIDES_TEXTBOX_WIDTH + 10, 
+							   10, 
+							   //numSidesTextBox.getYCoord(), 
+							   10, 
+							   calculateButtonTexture.getFrameWidth(), 
+							   calculateButtonTexture.getFrameHeight(), 
+							   true, 
+							   false};
+	mainWindow.addComponent(calculateButton);
+
 	int framesCounter = 0;
-	SetTargetFPS(30);
+	Vector2 mouseLocation = {0.0f, 0.0f};
+	SetTargetFPS(60);
 	
 	while(!WindowShouldClose())
 	{
 		// Update
-		mainWindow.update(framesCounter);
+		mainWindow.update(framesCounter, mouseLocation);
 
 		// Draw
 		BeginDrawing();
