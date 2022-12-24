@@ -3,37 +3,49 @@
 
 #include "raylib.h"
 #include "GComponent.h"
-#include "GTexture.h"
 #include <string>
 
 // Animated Button class
 // Requires a texture with 3 frames for animation
 class GButton : public GComponent
 {
-    private:
-    GTexture* texture;
+private:
+    int numFrames = 3;
+    Texture2D* texture;
+    float frameWidth;
+    float frameHeight;
+    float xCoord;
+    float yCoord;
     Rectangle frameRectangle;
-    Rectangle boundingBox;
+    Rectangle buttonBoundingBox;
     int buttonState;
-    bool buttonClicked;
-    int xCoord = 0;
-    int yCoord = 0;
-    int width = 10;
-    int height = 10;
 
-    public:
-    GButton(std::string newName, 
-             GTexture& initTexture, 
-             int initButtonState, 
-             int initXCoord, 
-             int initYCoord, 
-             int initWidth, 
-             int initHeight, 
-             bool focusableStatus, 
-             bool hasFocusStatus);
+public:
+    GButton(std::string initName, 
+           bool initFocusableStatus, 
+           bool initHasFocusStatus, 
+           Texture2D& initTexture, 
+           float initFrameWidth, 
+           float initFrameHeight, 
+           float initXCoord, 
+           float initYCoord) :
+           GComponent(initName, initFocusableStatus, initHasFocusStatus)
+    {
+        texture = &initTexture;
+        frameWidth = initFrameWidth;
+        frameHeight = (initFrameHeight);
+        frameRectangle = {0, 0, initFrameWidth, initFrameHeight};
+        xCoord = initXCoord;
+        yCoord = initYCoord;
+        buttonBoundingBox = {initXCoord, 
+                             initYCoord, 
+                             initFrameWidth, 
+                             initFrameHeight};
+        buttonState = 0;
+    };
     ~GButton(){};
+    void update(int& framesCounter, Vector2 mouseCoords);
     void draw(int& framesCounter);
-    void update(int& framesCounter, Vector2 mouseLocation);
 };
 
 #endif
