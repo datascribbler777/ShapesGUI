@@ -1,24 +1,63 @@
 #include "raylib.h"
+#include "GButton.h"
+#include "GComponent.h"
 #include "GWindow.h"
 #include "GLabel.h"
 #include "GTextBox.h"
+#include <string>
+#include <iostream>
 
-int main()
+// These 3 functions are to handle button clicks
+// Function pointers to these functions are added in the GButton class
+void numSidesButtonClick()
 {
-	const int WINDOW_WIDTH = 540;
-	const int WINDOW_HEIGHT = 600;
-	const Color BGCOLOR = {70, 119, 202, 255};
-	const int TEXTSIZE = 20;
-	const int MESSAGE_LENGTH = 11;
-	const int NUM_SIDES_LABEL_LENGTH = 37;
-	const char windowTitle[MESSAGE_LENGTH] = "Shapes GUI";
-	const char message[NUM_SIDES_LABEL_LENGTH] = "How many sides does your shape have?";
-	const int NUMSIDES_TEXTBOX_WIDTH = 225;
-	const int TEXTBOX_HEIGHT = 30;
-	const int GUI_SPACER = 30;
+}
 
-	GWindow mainWindow(WINDOW_WIDTH, WINDOW_HEIGHT, BGCOLOR, windowTitle);
-	GLabel numSidesLabel("numSidesLabel", 
+void howToButtonClick()
+{
+
+}
+
+void gitHubButtonClick()
+{
+
+}
+
+// Program main entry point
+//------------------------------------------------------------------------------------------
+int main(void)
+{
+    int WINDOW_WIDTH = 540;
+    int WINDOW_HEIGHT = 600;
+    int NUM_FRAMES = 3;
+    int NUM_SIDES_LABEL_LENGTH = 37;
+    int TEXTSIZE = 20;
+    int HEADER_TEXTSIZE = 30;
+    int NUMSIDES_TEXTBOX_WIDTH = 225;
+    int TEXTBOX_HEIGHT = 30;
+    int GUI_SPACER = 30;
+    int MAIN_LABEL_LENGTH = 24;
+    Color BGCOLOR = {70, 119, 202, 255};
+    const char message[NUM_SIDES_LABEL_LENGTH] = "How many sides does your shape have?";
+    const char mainLabelText[MAIN_LABEL_LENGTH] = "IT'S HIP TO BE A SQUARE";
+
+    // GUI Elements
+    //--------------------------------------------------------------------------------------
+    GWindow mainWindow = {WINDOW_WIDTH, WINDOW_HEIGHT, BGCOLOR, "Shapes GUI"};
+
+    GLabel mainHeaderLabel("mainHeaderLabel", 
+                           (WINDOW_WIDTH / 2) - (MeasureText(mainLabelText, HEADER_TEXTSIZE) / 2), 
+                           2.5 * TEXTBOX_HEIGHT, 
+                           mainLabelText, 
+                           MAIN_LABEL_LENGTH, 
+                           HEADER_TEXTSIZE, 
+                           WHITE, 
+                           false, 
+                           false
+                           );
+    mainWindow.addComponent(mainHeaderLabel);
+
+    GLabel numSidesLabel("numSidesLabel", 
 					   (WINDOW_WIDTH / 2) - (MeasureText(message, TEXTSIZE) / 2), 
 					   WINDOW_WIDTH / 4, 
 					   message, 
@@ -29,7 +68,7 @@ int main()
 					   false);
 	mainWindow.addComponent(numSidesLabel);
 
-	GTextBox numSidesTextBox = {"numSidesTextBox", 
+    GTextBox numSidesTextBox = {"numSidesTextBox", 
 								 WINDOW_WIDTH / 2 - (NUMSIDES_TEXTBOX_WIDTH / 2), 
 								 numSidesLabel.getYCoord() + GUI_SPACER, 
 								 NUMSIDES_TEXTBOX_WIDTH, 
@@ -38,20 +77,73 @@ int main()
 								 true};
 	mainWindow.addComponent(numSidesTextBox);
 
-	int framesCounter = 0;
-	SetTargetFPS(30);
-	
-	while(!WindowShouldClose())
-	{
-		// Update
-		mainWindow.update(framesCounter);
+	// The exe will need this same access to display the image properly, 
+    // ie: exe must be able to see resource/button.png
+    Texture2D buttonTexture = LoadTexture("resources\\button.png"); // Load button texture
+    GButton numSidesButton = {"numSidesButton", 
+                       true, 
+                       false, 
+                       buttonTexture, 
+                       (float)buttonTexture.width, 
+                       (float)buttonTexture.height / NUM_FRAMES, 
+                       (float)numSidesTextBox.getXCoord() + NUMSIDES_TEXTBOX_WIDTH + 10.0f, 
+                       (float)numSidesTextBox.getYCoord(), 
+                       numSidesButtonClick};
+    mainWindow.addComponent(numSidesButton);  
 
-		// Draw
-		BeginDrawing();
-			mainWindow.draw(framesCounter);
-		EndDrawing();
-	}
-	
-	CloseWindow();
-	return 0;
+    Texture2D howToTexture = LoadTexture("resources\\HowToButton.png");
+    GButton howToButton = {"howToTexture", 
+                           true,
+                           false,
+                           howToTexture, 
+                           (float)howToTexture.width,
+                           (float)howToTexture.height / NUM_FRAMES, 
+                           (float)mainHeaderLabel.getXCoord(), 
+                           (float)TEXTBOX_HEIGHT, 
+                           howToButtonClick};
+    mainWindow.addComponent(howToButton);
+
+    Texture2D githubTexture = LoadTexture("resources\\GitHubButton.png");
+    GButton githubButton = {"githubTexture", 
+                           true,
+                           false,
+                           githubTexture, 
+                           (float)githubTexture.width,
+                           (float)githubTexture.height / NUM_FRAMES, 
+                           (float)mainHeaderLabel.getXCoord() + MeasureText(mainLabelText, HEADER_TEXTSIZE) - 
+                                  githubTexture.width, 
+                           (float)TEXTBOX_HEIGHT, 
+                           gitHubButtonClick};
+    mainWindow.addComponent(githubButton);
+
+	int framesCounter = 0;
+	Vector2 mouseLocation = {0.0f, 0.0f};    
+
+    SetTargetFPS(60);
+    
+    // Main loop
+    //--------------------------------------------------------------------------------------
+    while (!WindowShouldClose())    // Detect window close button or ESC key
+    {
+        // Update
+        //----------------------------------------------------------------------------------
+        mouseLocation = GetMousePosition();
+        mainWindow.update(framesCounter, mouseLocation);
+
+        // Draw
+        //----------------------------------------------------------------------------------
+        BeginDrawing();
+
+            ClearBackground(RAYWHITE);
+            mainWindow.draw(framesCounter);
+
+        EndDrawing();
+    }
+
+    // De-Initialization
+    //--------------------------------------------------------------------------------------
+    UnloadTexture(buttonTexture); 
+    CloseWindow();
+
+    return 0;
 }

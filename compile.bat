@@ -16,6 +16,10 @@ if exist "obj/GTextBox.o" del obj\GTextBox.o
 g++ -I inc -c src/GTextBox.cpp -o obj/GTextBox.o -O1 -Wall
 if exist "obj/GTextBox.o" echo GTextBox Compilation Successful
 
+if exist "obj/GButton.o" del obj\GButton.o
+g++ -I inc -c src/GButton.cpp -o obj/GButton.o -O1 -Wall
+if exist "obj/GButton.o" echo GButton Compilation Successful
+
 if exist "bin/shapes.exe" del bin\shapes.exe
-g++ obj/GWindow.o obj/GLabel.o obj/shapes.o obj/GTextBox.o -o bin/shapes -L lib -lraylib -lopengl32 -lgdi32 -lwinmm
+g++ obj/GWindow.o obj/GLabel.o obj/shapes.o obj/GTextBox.o obj/GButton.o -o bin/shapes -L lib -lraylib -lopengl32 -lgdi32 -lwinmm
 if exist "bin/shapes.exe" echo Shapes Linking Successful

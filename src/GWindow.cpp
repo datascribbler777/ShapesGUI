@@ -52,10 +52,10 @@ void GWindow::setCurrentFocusIndex(int newIndex)
     currentFocusIndex = newIndex;
 }
 
-void GWindow::update(int& framesCounter)
+void GWindow::update(int& framesCounter, Vector2 mouseLocation)
 {
     for(size_t i = 0; i < components.size(); i++)
     {
-        components[i]->update(framesCounter);
+        components[i]->update(framesCounter, mouseLocation);
     }
 }

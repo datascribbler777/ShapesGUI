@@ -13,7 +13,7 @@ class GTextBox : public GComponent
     int width = 10;
     int height = 10;
     static const int TEXTSIZE = 20;
-    static const size_t CONTENT_MAX_SIZE = 3;
+    static const int CONTENT_MAX_SIZE = 3;
     char content[CONTENT_MAX_SIZE + 1] = "\0";
     int contentCurrentSize = 0;
 
@@ -32,7 +32,9 @@ class GTextBox : public GComponent
              height(initHeight){};
     ~GTextBox(){};
     void draw(int& framesCounter);
-    void update(int& framesCounter);
+    void update(int& framesCounter, Vector2 mouseLocation);
+    int getXCoord(){ return xCoord; };
+    int getYCoord(){ return yCoord; };
 };
 
 #endif

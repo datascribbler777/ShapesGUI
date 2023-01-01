@@ -2,7 +2,7 @@
 
 void GTextBox::draw(int& framesCounter)
 {
-    Rectangle temp = {xCoord, yCoord, width, height};
+    Rectangle temp = {(float)xCoord, (float)yCoord, (float)width, (float)height};
     DrawRectangleRec(temp, WHITE);
     if(getFocusStatus())
     {
@@ -33,7 +33,7 @@ void GTextBox::draw(int& framesCounter)
     }
 }
 
-void GTextBox::update(int& framesCounter)
+void GTextBox::update(int& framesCounter, Vector2 mouseLocation)
 {
     // Handle typing in this text box
     if(getFocusStatus())
