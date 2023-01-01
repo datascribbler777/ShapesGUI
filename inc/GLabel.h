@@ -27,6 +27,7 @@ class GLabel : public GComponent
            bool hasFocusStatus);
     ~GLabel(){};
     void draw(int& framesCounter);
+    int getXCoord(){return xCoord;};
     int getYCoord(){return yCoord;};
     void update(int& framesCounter, Vector2 mouseLocation);
 };

@@ -2,7 +2,7 @@
 
 void GTextBox::draw(int& framesCounter)
 {
-    Rectangle temp = {xCoord, yCoord, width, height};
+    Rectangle temp = {(float)xCoord, (float)yCoord, (float)width, (float)height};
     DrawRectangleRec(temp, WHITE);
     if(getFocusStatus())
     {
