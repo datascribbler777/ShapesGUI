@@ -12,6 +12,7 @@ class GButton : public GComponent
 private:
     int numFrames = 3;
     Texture2D* texture;
+    Texture2D buttonTexture;
     float frameWidth;
     float frameHeight;
     float xCoord;
@@ -24,30 +25,24 @@ private:
 
 public:
     GButton(std::string initName, 
-           bool initFocusableStatus, 
-           bool initHasFocusStatus, 
-           Texture2D& initTexture, 
-           float initFrameWidth, 
-           float initFrameHeight, 
-           float initXCoord, 
-           float initYCoord, 
-           void(*incomingFunction)()) :
-           GComponent(initName, initFocusableStatus, initHasFocusStatus)
+            bool initFocusableStatus, 
+            bool initHasFocusStatus, 
+            std::string textureFileName, 
+            int initXCoord, 
+            int initYCoord, 
+            void(*incomingFunction)()) :
+            GComponent(initName, initFocusableStatus, initHasFocusStatus),  
+            buttonState{0}
     {
-        texture = &initTexture;
-        frameWidth = initFrameWidth;
-        frameHeight = (initFrameHeight);
-        frameRectangle = {0, 0, initFrameWidth, initFrameHeight};
-        xCoord = initXCoord;
-        yCoord = initYCoord;
-        buttonBoundingBox = {initXCoord, 
-                             initYCoord, 
-                             initFrameWidth, 
-                             initFrameHeight};
-        buttonState = 0;
         onClickFunction = incomingFunction;
-    };
-    ~GButton(){};
+        initializeTexture(textureFileName);
+        initializeFrame();
+        initBoundingBox(initXCoord, initYCoord);
+    }
+    ~GButton();
+    void initializeTexture(std::string textureName);
+    void initializeFrame();
+    void initBoundingBox(int initXCoord, int initYCoord);
     void update(int& framesCounter, Vector2 mouseCoords);
     void draw(int& framesCounter);
 };

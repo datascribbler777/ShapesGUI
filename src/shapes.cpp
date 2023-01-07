@@ -1,3 +1,7 @@
+// Program to create a GUI in C++ using the raylib gaming library
+// Note: a copy of the resource folder must be visible to the .exe for
+// textures to show up properly.
+
 #include "raylib.h"
 #include "GButton.h"
 #include "GComponent.h"
@@ -36,7 +40,6 @@ int main(void)
 {
     int WINDOW_WIDTH = 540;
     int WINDOW_HEIGHT = 600;
-    int NUM_FRAMES = 3;
     int NUM_SIDES_LABEL_LENGTH = 37;
     int TEXTSIZE = 20;
     int HEADER_TEXTSIZE = 30;
@@ -84,42 +87,31 @@ int main(void)
 								 true};
 	mainWindow.addComponent(numSidesTextBox);
 
-	// The exe will need this same access to display the image properly, 
-    // ie: exe must be able to see resource/button.png
-    Texture2D buttonTexture = LoadTexture("resources\\button.png"); // Load button texture
     GButton numSidesButton = {"numSidesButton", 
-                       true, 
-                       false, 
-                       buttonTexture, 
-                       (float)buttonTexture.width, 
-                       (float)buttonTexture.height / NUM_FRAMES, 
-                       (float)numSidesTextBox.getXCoord() + NUMSIDES_TEXTBOX_WIDTH + 10.0f, 
-                       (float)numSidesTextBox.getYCoord(), 
-                       numSidesButtonClick};
-    mainWindow.addComponent(numSidesButton);  
+                           true, 
+                           false, 
+                           "resources\\button.png", 
+                           numSidesTextBox.getXCoord() + NUMSIDES_TEXTBOX_WIDTH + 10, 
+                           numSidesTextBox.getYCoord(),
+                           numSidesButtonClick};
+    mainWindow.addComponent(numSidesButton);
 
-    Texture2D howToTexture = LoadTexture("resources\\HowToButton.png");
-    GButton howToButton = {"howToTexture", 
-                           true,
-                           false,
-                           howToTexture, 
-                           (float)howToTexture.width,
-                           (float)howToTexture.height / NUM_FRAMES, 
-                           (float)mainHeaderLabel.getXCoord(), 
-                           (float)TEXTBOX_HEIGHT, 
+    GButton howToButton = {"howToTextureButton", 
+                           true, 
+                           false, 
+                           "resources\\HowToButton.png", 
+                           mainHeaderLabel.getXCoord(), 
+                           TEXTBOX_HEIGHT, 
                            howToButtonClick};
     mainWindow.addComponent(howToButton);
 
-    Texture2D githubTexture = LoadTexture("resources\\GitHubButton.png");
-    GButton githubButton = {"githubTexture", 
-                           true,
-                           false,
-                           githubTexture, 
-                           (float)githubTexture.width,
-                           (float)githubTexture.height / NUM_FRAMES, 
-                           (float)mainHeaderLabel.getXCoord() + MeasureText(mainLabelText, HEADER_TEXTSIZE) - 
-                                  githubTexture.width, 
-                           (float)TEXTBOX_HEIGHT, 
+    GButton githubButton = {"githubButton", 
+                           true, 
+                           false, 
+                           "resources\\GitHubButton.png", 
+                           mainHeaderLabel.getXCoord() + MeasureText(mainLabelText, HEADER_TEXTSIZE) - 
+                                  93, 
+                           TEXTBOX_HEIGHT, 
                            gitHubButtonClick};
     mainWindow.addComponent(githubButton);
 
@@ -147,11 +139,6 @@ int main(void)
         EndDrawing();
     }
 
-    // De-Initialization
-    //--------------------------------------------------------------------------------------
-    UnloadTexture(buttonTexture);
-    UnloadTexture(howToTexture);
-    UnloadTexture(githubTexture);
     CloseWindow();
 
     return 0;
