@@ -7,6 +7,13 @@
 #include <string>
 #include <iostream>
 
+// Namespacing these because raylib uses the same class names
+namespace MSWin
+{
+    #include <windows.h>
+    #include <shellapi.h>
+}
+
 // These 3 functions are to handle button clicks
 // Function pointers to these functions are added in the GButton class
 void numSidesButtonClick()
@@ -20,7 +27,7 @@ void howToButtonClick()
 
 void gitHubButtonClick()
 {
-
+    MSWin::ShellExecuteW(0, 0, L"https://github.com/datascribbler777/ShapesGUI", 0, 0 , SW_SHOW );
 }
 
 // Program main entry point
@@ -142,7 +149,9 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    UnloadTexture(buttonTexture); 
+    UnloadTexture(buttonTexture);
+    UnloadTexture(howToTexture);
+    UnloadTexture(githubTexture);
     CloseWindow();
 
     return 0;

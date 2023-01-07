@@ -56,6 +56,9 @@ void GWindow::update(int& framesCounter, Vector2 mouseLocation)
 {
     for(size_t i = 0; i < components.size(); i++)
     {
-        components[i]->update(framesCounter, mouseLocation);
+        if(components[i] != nullptr)
+        {
+            components[i]->update(framesCounter, mouseLocation);
+        }
     }
 }

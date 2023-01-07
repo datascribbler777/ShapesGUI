@@ -20,7 +20,7 @@ private:
     Rectangle buttonBoundingBox;
     int buttonState;
     // Function pointer to function to handle button clicks
-    void (*onClickFunction)();
+    void (*onClickFunction)() = nullptr;
 
 public:
     GButton(std::string initName, 
@@ -31,7 +31,7 @@ public:
            float initFrameHeight, 
            float initXCoord, 
            float initYCoord, 
-           void(*onClickFunction)()) :
+           void(*incomingFunction)()) :
            GComponent(initName, initFocusableStatus, initHasFocusStatus)
     {
         texture = &initTexture;
@@ -45,7 +45,7 @@ public:
                              initFrameWidth, 
                              initFrameHeight};
         buttonState = 0;
-        onClickFunction = onClickFunction;
+        onClickFunction = incomingFunction;
     };
     ~GButton(){};
     void update(int& framesCounter, Vector2 mouseCoords);
