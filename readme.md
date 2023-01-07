@@ -11,6 +11,7 @@ The batfile included may work for you.
 * Windows
 * Labels
 * Text Box
+* Textured Buttons
 
 ## Screenshot
 ![Current GUI State](https://github.com/datascribbler777/ShapesGUI/blob/979435243f317b0fddd1f463f5fc680bf1455653/images/GUI.PNG)
