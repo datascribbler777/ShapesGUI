@@ -15,6 +15,10 @@ void GButton::update(int& framesCounter, Vector2 mouseCoords)
 
         if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
         {
+            if(onClickFunction != nullptr)
+            {
+                onClickFunction();
+            }
         }
     }
     else
